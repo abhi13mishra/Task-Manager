@@ -1,0 +1,58 @@
+<script>
+    function TaskManager(){
+        let tasks = [];
+
+         function addTask(title){
+            tasks.push({title, completed: false})
+            return this
+         }
+
+         function getAllTasks(){
+            return [...tasks]
+         }
+
+         function markComplete(title){
+            tasks = tasks.map(task => task.title == title ? {...task, completed: true} : task);
+            return this
+         }
+
+         function removeTask(title){
+            tasks = tasks.filter(task => task.title !== title);
+            return this
+         }
+
+         function getPandingTask(){
+            return tasks.filter(task => !task.completed);
+         }
+
+         function getCompletedTasks(){
+            return tasks.filter(task => task.completed).map(task => task.title);
+         }
+
+         function sortTasks(){
+            return [...tasks].sort((a,b)=> a.title.localeCompare(b.title))
+         }
+
+         return{
+            addTask,
+            getAllTasks,
+            markComplete,
+            removeTask,
+            getPandingTask,
+            getCompletedTasks,
+            sortTasks
+         };
+    }
+
+let manager = TaskManager();
+manager.addTask("javascript");
+manager.addTask("html");
+manager.addTask("css");
+manager.addTask("react");
+console.log("All Tasks:", manager.getAllTasks())
+console.log("markcompleted Tasks:", manager.markComplete("javascript"))
+console.log("remove Tasks:", manager.markComplete("css"))
+console.log("Panding Tasks:", manager.getPandingTask())
+console.log("Completed Tasks:", manager.getCompletedTasks())
+console.log("Sorted Tasks:", manager.sortTasks())
+</script>
